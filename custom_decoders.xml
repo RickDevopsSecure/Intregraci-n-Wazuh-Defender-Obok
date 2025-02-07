@@ -1,0 +1,10 @@
+<decoder_list>
+    <decoder name="microsoft_defender">
+        <prematch>.*Microsoft Defender.*</prematch>
+        <regex field="action">.*"Action":\s*"(.*?)".*</regex>
+        <regex field="description">.*"Description":\s*"(.*?)".*</regex>
+        <regex field="severity">.*"Severity":\s*"(.*?)".*</regex>
+        <regex field="device_name">.*"DeviceName":\s*"(.*?)".*</regex>
+    </decoder>
+</decoder_list>
+

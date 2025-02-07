@@ -5,7 +5,7 @@ import os
 # 📌 Credenciales de Azure AD (Reemplazadas con tus valores de ejemplo)
 TENANT_ID = "261bc682-cd4a-4ee7-8ae4-9e82e1342e72"  # Directory ID
 CLIENT_ID = "81ca360c-5261-4226-abb5-99469b84ee04"  # Application (Client) ID
-CLIENT_SECRET = "5e8Q~vCalS40V3wTjG.oAgqoR8jA~5AdzWOIaDD"  # Valor del secreto de cliente
+CLIENT_SECRET = "bi28Q~JgcVt3ccv5SJI7i0E8Oov5jlFTZPg8Wb7b"  # Valor del secreto de cliente
 
 # 📌 URL de autenticación en Azure AD
 AUTH_URL = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"

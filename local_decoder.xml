@@ -1,9 +1,10 @@
 <decoder name="microsoft_defender">
-    <prematch>.*microsoft_defender.*</prematch>
+    <prematch>.*MICROSOFT_DEFENDER_EVENT.*</prematch>
 </decoder>
 
 <decoder name="microsoft_defender_details">
     <parent>microsoft_defender</parent>
-    <regex>"Action"\s*:\s*"(.*?)".*"Description"\s*:\s*"(.*?)".*"Severity"\s*:\s*"(.*?)".*"DeviceName"\s*:\s*"(.*?)"</regex>
+    <regex>"Action":\s*"(.*?)",\s*"Description":\s*"(.*?)",\s*"Severity":\s*"(.*?)",\s*"DeviceName":\s*"(.*?)"</regex>
     <order>action, description, severity, device_name</order>
 </decoder>
+

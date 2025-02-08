@@ -1,5 +1,5 @@
 <decoder name="microsoft_defender">
-    <prematch>.*Microsoft Defender.*</prematch>
+    <prematch>.*microsoft_defender.*</prematch>
 </decoder>
 
 <decoder name="microsoft_defender_details">

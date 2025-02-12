@@ -1,0 +1,11 @@
+<decoder name="hypercube_decoder">
+  <prematch>.*hypercube_logs.json.*</prematch>
+  <json>
+    <field name="title" type="string"/>
+    <field name="description" type="string"/>
+    <field name="status" type="string"/>
+    <field name="created_at" type="string"/>
+    <field name="updated_at" type="string"/>
+    <field name="documentation" type="string"/>
+  </json>
+</decoder>

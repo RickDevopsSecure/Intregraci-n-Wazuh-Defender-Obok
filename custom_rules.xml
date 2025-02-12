@@ -1,14 +1,21 @@
-<group name="microsoft_defender,">
+<group name="microsoft_defender">
   <rule id="100001" level="5">
     <decoded_as>json</decoded_as>
     <field name="program_name">microsoft_defender</field>
     <description>Microsoft Defender detected a threat: $(Description) on $(DeviceName)</description>
   </rule>
-  
+
   <rule id="100002" level="10">
     <decoded_as>json</decoded_as>
     <field name="program_name">microsoft_defender</field>
     <field name="Severity">High</field>
     <description>⚠️ CRITICAL: High severity threat detected: $(Description) on $(DeviceName)</description>
+  </rule>
+</group>
+
+<group name="hypercube,security">
+  <rule id="100009" level="10">
+    <decoded_as>hypercube_decoder</decoded_as>
+    <description>Recomendación de seguridad recibida desde Hypercube: $title - $description.</description>
   </rule>
 </group>

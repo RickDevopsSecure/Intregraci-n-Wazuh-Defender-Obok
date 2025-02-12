@@ -14,7 +14,8 @@
 
   <rule id="100009" level="10">
     <decoded_as>hypercube_decoder</decoded_as>
-    <description>Recomendación de seguridad recibida desde Hypercube: $title - $description.</description>
+    <match>.*</match>
+    <description>Recomendación de seguridad recibida desde Hypercube: $(title) - $(description).</description>
   </rule>
 </group>
 

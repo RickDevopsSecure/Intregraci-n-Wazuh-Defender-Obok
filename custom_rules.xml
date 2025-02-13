@@ -11,10 +11,9 @@
     <field name="Severity">High</field>
     <description>⚠️ CRITICAL: High severity threat detected: $(Description) on $(DeviceName)</description>
   </rule>
-
+  
   <rule id="100009" level="10">
-    <decoded_as>hypercube_decoder</decoded_as>
-    <match>.*</match>
+    <decoded_as>obok_decoder</decoded_as>
     <description>Recomendación de seguridad recibida desde Hypercube: $(title) - $(description).</description>
   </rule>
 </group>

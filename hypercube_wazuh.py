@@ -34,9 +34,15 @@ def get_recommendations(limit=10, page=1):
         response.raise_for_status()  # Lanza un error si la respuesta es 4xx o 5xx
         data = response.json()
         
-        # Guardar los logs
-        with open("/var/ossec/logs/obok_recommendations.json", "w") as file:
+        # Verificar que la respuesta contenga recomendaciones
+        if 'result' not in data:
+            logging.error("La respuesta de la API no contiene las recomendaciones esperadas.")
+            return None
+
+        # Guardar los logs en formato JSON
+        with open("/var/ossec/logs/obok_recommendations.json", "a") as file:
             json.dump(data, file, indent=4)
+            file.write("\n")  # Agregar una nueva línea después de cada entrada
         
         logging.info("Datos obtenidos y almacenados correctamente.")
         return data

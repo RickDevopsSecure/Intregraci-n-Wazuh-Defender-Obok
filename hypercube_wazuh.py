@@ -3,7 +3,7 @@ import json
 import os
 import time
 
-API_KEY = ""
+API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2F1dGguZ2V0b2Jvay5jb20vdXNlcl9pZCI6ImF1dGgwfDY2Yzc5Yjk5ZDc3YmUwMmU2YTVmMGE4ZiIsInVzZXJJZCI6IjY2Yzc5YjlhZWM1NzM2NDJkMDQ3OWY2NyIsImFjY2Vzc0tleUlkIjoiNjdhYWE5MjczODE4ZWFmZjBlMjZhYjIzIiwiaWF0IjoxNzM5MjM3NjcxfQ.VL11FcfeVE8hzG8ffnOzrgdNHScs1Qup7QMjdjRtf5U"
 API_RECOMMENDATIONS = "https://api.gethypercube.com/recommendations"
 LOG_FILE = "/var/ossec/logs/hypercube_logs.json"
 

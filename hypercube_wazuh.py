@@ -1,44 +1,65 @@
 import requests
 import json
-import os
+import logging
 import time
 
-API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2F1dGguZ2V0b2Jvay5jb20vdXNlcl9pZCI6ImF1dGgwfDY2Yzc5Yjk5ZDc3YmUwMmU2YTVmMGE4ZiIsInVzZXJJZCI6IjY2Yzc5YjlhZWM1NzM2NDJkMDQ3OWY2NyIsImFjY2Vzc0tleUlkIjoiNjdhYWE5MjczODE4ZWFmZjBlMjZhYjIzIiwiaWF0IjoxNzM5MjM3NjcxfQ.VL11FcfeVE8hzG8ffnOzrgdNHScs1Qup7QMjdjRtf5U"
-API_RECOMMENDATIONS = "https://api.gethypercube.com/recommendations"
-LOG_FILE = "/var/ossec/logs/hypercube_logs.json"
+# Configuración del logging
+logging.basicConfig(
+    filename='/var/ossec/logs/obok_logs.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
-def get_recommendations():
-    headers = {"Authorization": f"Bearer {API_KEY}", "Accept": "application/json"}
-    params = {"limit": 100, "sortBy": "updatedAt:desc", "status": "Pending"}
+# Configuración de la API
+API_URL = "https://api.gethypercube.com/recommendations"
+TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2F1dGguZ2V0b2Jvay5jb20vdXNlcl9pZCI6ImF1dGgwfDY2Yzc5Yjk5ZDc3YmUwMmU2YTVmMGE4ZiIsInVzZXJJZCI6IjY2Yzc5YjlhZWM1NzM2NDJkMDQ3OWY2NyIsImFjY2Vzc0tleUlkIjoiNjdiOGI0NDhmM2EyYTUzNDZlMGVlYmZlIiwiaWF0IjoxNzQwMTU4MDI0fQ.TZgsxqgLRkzSF89f_vRq8Vofy1hjXtGAZQ6hrju7gHE"
+HEADERS = {
+    "Authorization": f"Bearer {TOKEN}",
+    "Content-Type": "application/json"
+}
 
+# ID de la organización
+ORGANIZATION_ID = "62bb3427e72c89805bb1d1dd"
+
+# Función para obtener recomendaciones
+def get_recommendations(limit=10, page=1):
+    params = {
+        "sortBy": "createdAt:desc",
+        "limit": limit,
+        "pageNumber": page,
+        "organizationId": ORGANIZATION_ID
+    }
     try:
-        response = requests.get(API_RECOMMENDATIONS, headers=headers, params=params, timeout=30)
-        response.raise_for_status()
-        return response.json()
+        response = requests.get(API_URL, headers=HEADERS, params=params)
+        response.raise_for_status()  # Lanza un error si la respuesta es 4xx o 5xx
+        data = response.json()
+        
+        # Guardar los logs
+        with open("/var/ossec/logs/obok_recommendations.json", "w") as file:
+            json.dump(data, file, indent=4)
+        
+        logging.info("Datos obtenidos y almacenados correctamente.")
+        return data
     except requests.exceptions.RequestException as e:
-        print(f"Error en la solicitud: {e}")
+        logging.error(f"Error en la solicitud: {e}")
         return None
 
-def save_to_log(data):
-    with open(LOG_FILE, "a") as log_file:
-        for rec in data.get("result", []):
-            log_entry = {
-                "integration": rec.get("integration", ""),
-                "title": rec.get("title", ""),
-                "description": rec.get("description", ""),
-                "status": rec.get("status", ""),
-                "created_at": rec.get("createdAt", ""),
-                "updated_at": rec.get("updatedAt", ""),
-                "documentation": f"https://knowledge.getobok.com/?s={rec.get('_id', '')}"
-            }
-            log_file.write(json.dumps(log_entry) + "\n")
+# Función para visualizar los logs
+def show_logs():
+    try:
+        with open("/var/ossec/logs/obok_recommendations.json", "r") as file:
+            data = json.load(file)
+            print(json.dumps(data, indent=4))
+    except FileNotFoundError:
+        logging.warning("El archivo de logs no existe.")
+        print("No hay logs disponibles.")
 
-def main():
-    start_time = time.time()
-    recommendations = get_recommendations()
-    if recommendations:
-        save_to_log(recommendations)
-    print(f"Proceso completado en {time.time() - start_time:.2f} segundos")
+# Ejecución automática cada cierto tiempo
+def run_monitor(interval=600):  # Cada 10 minutos
+    while True:
+        logging.info("Ejecutando consulta a la API de Obok...")
+        get_recommendations()
+        time.sleep(interval)
 
 if __name__ == "__main__":
-    main()
+    run_monitor()

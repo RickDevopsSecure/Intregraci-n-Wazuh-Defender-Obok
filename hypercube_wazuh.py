@@ -59,6 +59,23 @@ def show_logs():
     except FileNotFoundError:
         logging.warning("El archivo de logs no existe.")
         print("No hay logs disponibles.")
+#Función para guardar en syslogs
+def save_to_log_wazuh(data):
+    # Suponiendo que los datos están en formato de diccionario JSON
+    for rec in data.get("result", []):
+        log_entry = {
+            "timestamp": rec.get("createdAt", ""),
+            "title": rec.get("title", ""),
+            "description": rec.get("description", ""),
+            "status": rec.get("status", ""),
+            "documentation": f"https://knowledge.getobok.com/?s={rec.get('_id', '')}",
+            "integration": rec.get("integration", ""),
+            "source": "Hypercube API"
+        }
+
+        # Aquí se escribe el log en el archivo Wazuh de logs
+        with open("/var/ossec/logs/obok_wazuh.log", "a") as log_file:
+            log_file.write(json.dumps(log_entry) + "\n")
 
 # Ejecución automática cada cierto tiempo
 def run_monitor(interval=600):  # Cada 10 minutos

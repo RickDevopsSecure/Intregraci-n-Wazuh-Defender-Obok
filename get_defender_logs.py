@@ -6,7 +6,7 @@ from msal import ConfidentialClientApplication
 # Configurar credenciales de Azure
 TENANT_ID = "261bc682-cd4a-4ee7-8ae4-9e82e1342e72"
 CLIENT_ID = "81ca360c-5261-4226-abb5-99469b84ee04"
-CLIENT_SECRET = "d22fa040-2099-41c0-ac2d-1e63a9e18b53"
+CLIENT_SECRET = "bi28Q~JgcVt3ccv5SJI7i0E8Oov5jlFTZPg8Wb7b"
 AUTHORITY = f"https://login.microsoftonline.com/{TENANT_ID}"
 SCOPE = ["https://graph.microsoft.com/.default"]
 

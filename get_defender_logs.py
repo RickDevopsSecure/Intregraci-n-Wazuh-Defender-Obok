@@ -15,9 +15,9 @@ GRAPH_URL = "https://graph.microsoft.com/v1.0/security/alerts"
 
 def get_access_token():
     app = ConfidentialClientApplication(CLIENT_ID, CLIENT_SECRET, AUTHORITY)
-    result = app.acquire_token_for_client(SCOPES=SCOPE)
+    result = app.acquire_token_for_client(SCOPE)  # Corrección aquí
     return result.get("access_token", None)
-
+    
 def fetch_defender_logs():
     token = get_access_token()
     if not token:

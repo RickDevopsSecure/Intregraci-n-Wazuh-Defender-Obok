@@ -1,10 +1,5 @@
-<decoder name="microsoft_defender">
-    <prematch>.*microsoft_defender.*</prematch>
+<decoder name="defender-alert">
+    <prematch>.*</prematch>
+    <regex>"id":\s*"([^"]+)".*"title":\s*"([^"]+)".*"category":\s*"([^"]+)".*</regex>
+    <order>id, title, category</order>
 </decoder>
-
-<decoder name="microsoft_defender_details">
-    <parent>microsoft_defender</parent>
-    <regex>"incidentId":\s*(\d+),\s*"incidentName":\s*"(.*?)",\s*"severity":\s*"(.*?)"</regex>
-    <order>incident_id, incident_name, severity</order>
-</decoder>
-

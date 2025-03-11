@@ -4,7 +4,7 @@ import os
 
 # Configuración de la API de Obok
 OBOk_API_URL = "https://api.getobok.com/v1/recommendations"
-API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2F1dGguZ2V0b2Jvay5jb20vdXNlcl9pZCI6ImF1dGgwfDY2Yzc5Yjk5ZDc3YmUwMmU2YTVmMGE4ZiIsInVzZXJJZCI6IjY2Yzc5YjlhZWM1NzM2NDJkMDQ3OWY2NyIsImFjY2Vzc0tleUlkIjoiNjdjZjliZTY4NDE1YTJmYmY5ZTU3NzM4IiwiaWF0IjoxNzQxNjU5MTEwfQ.iiOk75RNrvrYLA0frCSVuyLMgHu-zQ2bekP3B1XXegA"
+API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2F1dGguZ2V0b2Jvay5jb20vdXNlcl9pZCI6ImF1dGgwfDY2Yzc5Yjk5ZDc3YmUwMmU2YTVmMGE4ZiIsInVzZXJJZCI6IjY2Yzc5YjlhZWM1NzM2NDJkMDQ3OWY2NyIsImFjY2Vzc0tleUlkIjoiNjdkMDk3NzEzMzJhOTdjZTVmZjRmZTQ2IiwiaWF0IjoxNzQxNzIzNTA1fQ.jYI-CYbBxG3KY0tfHYSDxO9wvD-4zz6fnA1Z0JJ_zp0"
 
 HEADERS = {
     "Authorization": f"Bearer {API_KEY}",
